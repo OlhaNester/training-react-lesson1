@@ -1,12 +1,13 @@
 import React from "react";
-import reactDom from "react-dom";
+import ReactDOM from "react-dom";
+import App from "./App";
 
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
 
 // const link = React.createElement("a", { href: "reactjs.org" }, "Ссылка");
 // console.log(link);
@@ -27,17 +28,16 @@ const painting = {
   quantity: 25,
 };
 
-const template = (
-  <div>
-    <img
-      src="https://cdn.pixabay.com/photo/2017/07/31/22/05/feathers-2561511_1280.jpg"
-      alt="Feather. Art abstract"
-      width="480"
-    />
-    <h2>Feather. Art abstract</h2>
-    <p>Цена: {painting.price} кредитов</p>
-    <button type="button">Добавить в корзину</button>
-  </div>
-);
+// const template = (
+//   <div>
+//     <img src={painting.url} alt={painting.title} width="480" />
+//     <h2>{painting.title}</h2>
+//     <p>
+//       Автор: <a href={painting.author.url}>{painting.author.tag}</a>
+//     </p>
+//     <p>Цена: {painting.price} кредитов</p>
+//     <button type="button">Добавить в корзину</button>
+//   </div>
+// );
 //console.log(template);
-reactDom.render(template, document.getElementById("root"));
+// reactDom.render(<App />, document.getElementById("root"));
