@@ -1,16 +1,21 @@
-import React from "react";
-import Painting from "./components/Painting";
-import paintings from "./paintings.json";
+import React from 'react';
+import ColorPicker from './ColorPicker';
 
-const App = () => {
+const colorPickerOpt = [
+  { label: 'red', color: '#F44336' },
+  { label: 'green', color: '#4CAF50' },
+  { label: 'blue', color: '#2196F3' },
+  { label: 'grey', color: '#607D8B' },
+  { label: 'pink', color: '#E91E63' },
+  { label: 'indigo', color: '#3F51B5' },
+];
+
+const App=()=> {
   return (
-    <div>
-      <h2>Это гшлавный компонент App</h2>
-      <p>
-        <Painting url={paintings[0].url} title={paintings[0].title} />
-      </p>
+    <div className="App">
+      <ColorPicker options={colorPickerOpt}/>
     </div>
   );
-};
+}
 
 export default App;
