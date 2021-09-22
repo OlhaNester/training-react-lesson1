@@ -15,17 +15,29 @@ class App extends Component {
   state = {
     todos: [
       { id: 'id-1', text: 'text-1', completed: false },
-      { id: 'id-2', text: 'text-2', completed: false },
-      { id: 'id-3', text: 'text-3', completed: false },
+      { id: 'id-2', text: 'text-2', completed: true },
+      { id: 'id-3', text: 'text-3', completed: true },
       { id: 'id-4', text: 'text-4', completed: false },
     ],
   };
+  deleteTodo = ( todoId ) => {
+     
+        this.setState(prevState => ({ todos: prevState.todos.filter(todo => todo.id !== todoId), }));
+    
+  };
 
+  
   
   render() {
     const { todos } = this.state;
+    const totalTodo = todos.length;
+    const complitedTodo = todos.reduce((acc, todo) => ( todo.completed ? acc + 1 : acc ), 0);
     return (<div className="App">
-      <TodoList todos={ todos}/>
+      <div>
+        <p>Общее кол-во { totalTodo}</p>
+        <p> Кол-во выполненных { complitedTodo}</p>
+      </div>
+      <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
       {/* <ColorPicker options={colorPickerOpt}/> */}
     </div>);
   
