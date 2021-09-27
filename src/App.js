@@ -14,6 +14,7 @@ const colorPickerOpt = [
 class App extends Component {
   state = {
     name: "",
+    tag: "",
     inputValue: "aaa",
     todos: [
       { id: "id-1", text: "text-1", completed: false },
@@ -25,12 +26,35 @@ class App extends Component {
   };
   deleteTodo = (todoId) => {
      
-    this.setState(prevState => ({ todos: prevState.todos.filter(todo => todo.id !== todoId), }));
+    this.setState(prevState =>
+      ({ todos: prevState.todos.filter(todo => todo.id !== todoId), }));
   };
 
-  handleNameChange = (event) => {
-    this.setState({ name: event.currentTarget.value });
-  }
+  toggleCompleted = todoId => {
+    console.log(todoId);
+  
+  this.setState(prevState => ({
+    todos: prevState.todos.map(todo => {
+      if (todo.id === todoId) {
+        return {
+          ...todo, completed: !todo.completed,
+        };
+      }
+      return todo;
+    }),
+  }));
+};
+  handleChange = (event) => {
+    const { name, value } = event.currentTarget;
+        this.setState({ [name]: value });
+  };
+  // handleNameChange = (event) => {
+  //   this.setState({ name: event.currentTarget.value });
+  // }
+
+  // handleTagChange = (event) => {
+  //   this.setState({ tag: event.currentTarget.value });
+  // }
   
   render() {
     const { todos } = this.state;
@@ -38,7 +62,12 @@ class App extends Component {
     const complitedTodo = todos.reduce((acc, todo) => (todo.completed ? acc + 1 : acc), 0);
     return (
       <div className="App">
-        <form> <label> Имя<input type="text" value={this.state.name} onChange={this.handleNameChange} /></label>
+        <form>
+          <label> Имя
+          <input type="text" name="name" value={this.state.name} onChange={this.handleChange } id={this.nameImputId}/>
+        </label>
+          <label> Ник   <input type="text" name="tag" value={this.state.tag} onChange={this.handleChange} id={this.nameImputId}/>
+          </label>
         </form>
       
         <form>
@@ -58,7 +87,7 @@ class App extends Component {
           <p>Общее кол-во {totalTodo}</p>
           <p> Кол-во выполненных {complitedTodo}</p>
         </div>
-        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
+        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} onToggleCompleted={this.toggleCompleted} />
         <ColorPicker options={colorPickerOpt} />
       </div>
     )

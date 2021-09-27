@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 class ColorPicker extends Component {
     state = {
-        activeOptInd: 3, //индекс массива
+        activeOptInd: 0, //индекс массива
     };
     setActiveInd = (index) => {
         this.setState({ activeOptInd: index });    //метод получает индекс кнопки и кидает его в стэйт
@@ -15,6 +15,8 @@ class ColorPicker extends Component {
         return classNames('ColorPicker_option', {
             'ColorPicker_option_active': index === this.state.activeOptInd,  // установили npm install classnames
                                                                               //  заимпортировали import classNames from 'classnames';
+            // в classNames(пишем все классы которые должны быть, 
+            //и потом объект в котором название класа и значение, которе меняется в зависимости от условия )
         });
     //    const Classes = ['ColorPicker_option'];
     //                     if (index === this.state.activeOptInd) {
