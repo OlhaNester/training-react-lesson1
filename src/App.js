@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ColorPicker from './ColorPicker';
 import TodoList from "./TodoList";
+import Form from "./Form";
+import shortid from "shortid";
 
 const colorPickerOpt = [
   { label: 'red', color: '#F44336' },
@@ -62,26 +64,16 @@ class App extends Component {
     const complitedTodo = todos.reduce((acc, todo) => (todo.completed ? acc + 1 : acc), 0);
     return (
       <div className="App">
+        <Form />
         <form>
-          <label> Имя
-          <input type="text" name="name" value={this.state.name} onChange={this.handleChange } id={this.nameImputId}/>
-        </label>
-          <label> Ник   <input type="text" name="tag" value={this.state.tag} onChange={this.handleChange} id={this.nameImputId}/>
-          </label>
-        </form>
+           <label> Имя
+      <input type="text" name="name" value={this.state.name} onChange={this.handleChange} id={this.nameImputId} />
+    </label>
+    <label> Ник   <input type="text" name="tag" value={this.state.tag} onChange={this.handleChange} id={this.nameImputId} />
+    </label>
+  </form>
       
-        <form>
-          <p>Ваш уровень:</p>
-          <label>
-            <input type="radio" name="" value="junior"></input>junior
-          </label>
-          <label>
-            <input type="radio" name="" value="middle"></input>middle
-          </label>
-          <label>
-            <input type="radio" name="" value="senior"></input>senior
-          </label>
-        </form>
+        
 
         <div>
           <p>Общее кол-во {totalTodo}</p>
