@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import ColorPicker from './ColorPicker';
 import TodoList from "./TodoList";
 import Form from "./Form";
-import shortid from "shortid";
 import TodoEditor from "./TodoEditor";
+import shortid from "shortid";
+import { findRenderedDOMComponentWithClass } from "react-dom/test-utils";
+
 
 const colorPickerOpt = [
   { label: 'red', color: '#F44336' },
@@ -27,6 +29,20 @@ class App extends Component {
     ],
 
   };
+
+  addTodo = (text) => {
+    
+    const todo = {
+      id: shortid.generate(),
+      text: text,
+      completed: false,
+    }
+    this.setState(prevState => ({
+  todos: [todo, ...prevState.todos]
+}))
+
+  };
+
   deleteTodo = (todoId) => {
      
     this.setState(prevState =>
@@ -82,7 +98,7 @@ class App extends Component {
           <p>Общее кол-во {totalTodo}</p>
           <p> Кол-во выполненных {complitedTodo}</p>
         </div>
-        <TodoEditor/>
+        <TodoEditor onSubmit={ this.addTodo}/>
         <TodoList todos={todos} onDeleteTodo={this.deleteTodo} onToggleCompleted={this.toggleCompleted} />
         <ColorPicker options={colorPickerOpt} />
       </div>

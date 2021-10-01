@@ -1,16 +1,25 @@
-import React, { Component } from 'core-js/library/fn/reflect/es7/metadata'
+import React, { Component } from 'react';
 
 class TodoEditor extends Component {
     state = {
         message: ''
     };
-    handleChange = (event) => { };
+    handleChange = (event) => {
+        this.setState({ message: event.currentTarget.value });
+    };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+  
+        this.props.onSubmit(this.state.message);
+        this.setState({ message: ''})
+    }
     
         render() {
             return (
-                <form className="TodoEditor">
+                <form className="TodoEditor" onSubmit={this.handleSubmit}>
                     <textarea className="TodoEditor_textarea" value={this.state.message} onChange={this.handleChange}></textarea>
-                    <button type="button" className="TodoEditor_button">Save</button>
+                    <button type="submit" className="TodoEditor_button">Save</button>
                     </form>
             );
         }
