@@ -3,6 +3,7 @@ import ColorPicker from './ColorPicker';
 import TodoList from "./TodoList";
 import Form from "./Form";
 import shortid from "shortid";
+import TodoEditor from "./TodoEditor";
 
 const colorPickerOpt = [
   { label: 'red', color: '#F44336' },
@@ -35,14 +36,14 @@ class App extends Component {
   toggleCompleted = todoId => {
     console.log(todoId);
   
-  this.setState(prevState => ({
-    todos: prevState.todos.map(todo => {
-      if (todo.id === todoId) {
-        return {
-          ...todo, completed: !todo.completed,
+  this.setState(prevState => ({                                     // можно переписать в виде тернарника:
+    todos: prevState.todos.map(todo => {                            // this.setState(prevState =>
+      if (todo.id === todoId) {                                     // todos: prevState.todos.map(todo => {
+        return {                                                    // todo.id === todoId ?
+          ...todo, completed: !todo.completed,                      // {  ...todo, completed: !todo.completed,} : todo
         };
       }
-      return todo;
+      return todo;  //если id не равен, мы возвращаем старый todo
     }),
   }));
 };
@@ -50,6 +51,8 @@ class App extends Component {
     const { name, value } = event.currentTarget;
         this.setState({ [name]: value });
   };
+
+  
   // handleNameChange = (event) => {
   //   this.setState({ name: event.currentTarget.value });
   // }
@@ -79,6 +82,7 @@ class App extends Component {
           <p>Общее кол-во {totalTodo}</p>
           <p> Кол-во выполненных {complitedTodo}</p>
         </div>
+        <TodoEditor/>
         <TodoList todos={todos} onDeleteTodo={this.deleteTodo} onToggleCompleted={this.toggleCompleted} />
         <ColorPicker options={colorPickerOpt} />
       </div>
