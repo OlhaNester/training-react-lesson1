@@ -22,10 +22,10 @@ class App extends Component {
     tag: "",
     inputValue: "aaa",
     todos: [
-      { id: "id-1", text: "text-1", completed: false },
-      { id: "id-2", text: "text-2", completed: true },
-      { id: "id-3", text: "text-3", completed: true },
-      { id: "id-4", text: "text-4", completed: false },
+      // { id: "id-1", text: "text-1", completed: false },
+      // { id: "id-2", text: "text-2", completed: true },
+      // { id: "id-3", text: "text-3", completed: true },
+      // { id: "id-4", text: "text-4", completed: false },
     ],
 
   };
@@ -71,13 +71,12 @@ class App extends Component {
   componentDidMount() {
        const todos = localStorage.getItem('todos');
     const parseTodos = JSON.parse(todos);
-    if (parseTodos) { }
-    this.setState({ todos: parseTodos });
+    if (parseTodos) { this.setState({ todos: parseTodos });}
+    
   }
 
   componentDidApdate(prevProps, prevState) {
-    if (this.state.todos !== prevState.todos)
-    {
+    if (this.state.todos !== prevState.todos) {
       localStorage.setItem('todos', JSON.stringify(this.state.todos));
 
     }
