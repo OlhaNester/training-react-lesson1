@@ -4,7 +4,8 @@ import TodoList from "./TodoList";
 import Form from "./Form";
 import TodoEditor from "./TodoEditor";
 import shortid from "shortid";
-import { findRenderedDOMComponentWithClass } from "react-dom/test-utils";
+import Modal from './Modal';
+//import { findRenderedDOMComponentWithClass } from "react-dom/test-utils";
 
 
 const colorPickerOpt = [
@@ -18,6 +19,7 @@ const colorPickerOpt = [
 
 class App extends Component {
   state = {
+    showModal: false,
     name: "",
     tag: "",
     inputValue: "aaa",
@@ -29,6 +31,21 @@ class App extends Component {
     ],
 
   };
+  componentDidMount() {
+       const todos = localStorage.getItem('todos');
+    const parseTodos = JSON.parse(todos);
+    if (parseTodos) { this.setState({ todos: parseTodos });}
+    
+  };
+
+  componentDidApdate(prevProps, prevState) {
+    if (this.state.todos !== prevState.todos) {
+      console.log("Обновилось поле")
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+
+    }
+    
+  };
 
   addTodo = (text) => {
     
@@ -36,6 +53,7 @@ class App extends Component {
       id: shortid.generate(),
       text: text,
       completed: false,
+      
     }
     this.setState(prevState => ({
   todos: [todo, ...prevState.todos]
@@ -62,26 +80,19 @@ class App extends Component {
       return todo;  //если id не равен, мы возвращаем старый todo
     }),
   }));
-};
+  };
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+
   handleChange = (event) => {
     const { name, value } = event.currentTarget;
         this.setState({ [name]: value });
   };
 
-  componentDidMount() {
-       const todos = localStorage.getItem('todos');
-    const parseTodos = JSON.parse(todos);
-    if (parseTodos) { this.setState({ todos: parseTodos });}
-    
-  }
-
-  componentDidApdate(prevProps, prevState) {
-    if (this.state.todos !== prevState.todos) {
-      localStorage.setItem('todos', JSON.stringify(this.state.todos));
-
-    }
-    
-  };
+  
   
   // handleNameChange = (event) => {
   //   this.setState({ name: event.currentTarget.value });
@@ -92,12 +103,16 @@ class App extends Component {
   // }
   
   render() {
-    const { todos } = this.state;
+    const { todos, showModal } = this.state;
     const totalTodo = todos.length;
     const complitedTodo = todos.reduce((acc, todo) => (todo.completed ? acc + 1 : acc), 0);
     return (
+      
       <div className="App">
-        <Form />
+        <button type="button" onClick={this.toggleModal}>Открыть модалку</button>
+        { showModal && <Modal />}
+
+        {/* <Form />
         <form>
            <label> Имя
       <input type="text" name="name" value={this.state.name} onChange={this.handleChange} id={this.nameImputId} />
@@ -114,7 +129,7 @@ class App extends Component {
         </div>
         <TodoEditor onSubmit={ this.addTodo}/>
         <TodoList todos={todos} onDeleteTodo={this.deleteTodo} onToggleCompleted={this.toggleCompleted} />
-        <ColorPicker options={colorPickerOpt} />
+        <ColorPicker options={colorPickerOpt} /> */}
       </div>
     )
   
