@@ -5,6 +5,7 @@ import Form from "./Form";
 import TodoEditor from "./TodoEditor";
 import shortid from "shortid";
 import Modal from './Modal';
+import Clock from './Clock';
 //import { findRenderedDOMComponentWithClass } from "react-dom/test-utils";
 
 
@@ -110,9 +111,15 @@ class App extends Component {
       
       <div className="App">
         <button type="button" onClick={this.toggleModal}>Открыть модалку</button>
-        { showModal && <Modal />}
+        <Clock/>
+        {showModal && <Modal onClose = {this.toggleModal}>
+          <h1>Это модальное окно</h1>
+          <p>Lorem Ipsum";
+          </p>
+          <button type="button" onClick={this.toggleModal}>Закрыть модалку</button>
+        </Modal>}
 
-        {/* <Form />
+        <Form />
         <form>
            <label> Имя
       <input type="text" name="name" value={this.state.name} onChange={this.handleChange} id={this.nameImputId} />
@@ -129,7 +136,7 @@ class App extends Component {
         </div>
         <TodoEditor onSubmit={ this.addTodo}/>
         <TodoList todos={todos} onDeleteTodo={this.deleteTodo} onToggleCompleted={this.toggleCompleted} />
-        <ColorPicker options={colorPickerOpt} /> */}
+        <ColorPicker options={colorPickerOpt} />
       </div>
     )
   
