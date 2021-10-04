@@ -68,6 +68,21 @@ class App extends Component {
         this.setState({ [name]: value });
   };
 
+  componentDidMount() {
+       const todos = localStorage.getItem('todos');
+    const parseTodos = JSON.parse(todos);
+    if (parseTodos) { }
+    this.setState({ todos: parseTodos });
+  }
+
+  componentDidApdate(prevProps, prevState) {
+    if (this.state.todos !== prevState.todos)
+    {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+
+    }
+    
+  };
   
   // handleNameChange = (event) => {
   //   this.setState({ name: event.currentTarget.value });
