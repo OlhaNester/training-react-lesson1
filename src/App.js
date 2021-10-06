@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 import ColorPicker from "./ColorPicker";
 import TodoList from "./TodoList";
 import Form from "./Form";
@@ -6,6 +7,7 @@ import TodoEditor from "./TodoEditor";
 import shortid from "shortid";
 import Modal from "./Modal";
 import Clock from "./Clock";
+
 //import { findRenderedDOMComponentWithClass } from "react-dom/test-utils";
 
 const colorPickerOpt = [
@@ -23,19 +25,17 @@ class App extends Component {
     name: "",
     tag: "",
     inputValue: "aaa",
-    todos: [
-      // { id: "id-1", text: "text-1", completed: false },
-      // { id: "id-2", text: "text-2", completed: true },
-      // { id: "id-3", text: "text-3", completed: true },
-      // { id: "id-4", text: "text-4", completed: false },
-    ],
+    todos: [],
   };
   componentDidMount() {
-    const todos = localStorage.getItem("todos");
-    const parseTodos = JSON.parse(todos);
-    if (parseTodos) {
-      this.setState({ todos: parseTodos });
-    }
+    axios.get('http://localhost:4040/todos').then(response => { console.log(response);})
+
+
+    // const todos = localStorage.getItem("todos");
+    // const parseTodos = JSON.parse(todos);
+    // if (parseTodos) {
+    //   this.setState({ todos: parseTodos });
+    // }
   }
 
   componentDidApdate(prevProps, prevState) {

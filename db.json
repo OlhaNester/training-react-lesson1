@@ -1,0 +1,7 @@
+{ "todos": [
+       { "id": "id-1", "text": "text-1", "completed": false },
+       { "id": "id-2", "text": "text-2", "completed": true },
+       { "id": "id-3", "text": "text-3", "completed": true },
+       { "id": "id-4", "text": "text-4", "completed": false }
+    ]
+}
