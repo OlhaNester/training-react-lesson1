@@ -28,14 +28,17 @@ class App extends Component {
     todos: [],
   };
   componentDidMount() {
-    axios.get('http://localhost:4040/todos').then(response => { console.log(response);})
+    // axios.get('http://localhost:4040/todos')
+    //   .then(response => {
+    //     console.log(response);
+    //   });
 
 
-    // const todos = localStorage.getItem("todos");
-    // const parseTodos = JSON.parse(todos);
-    // if (parseTodos) {
-    //   this.setState({ todos: parseTodos });
-    // }
+    const todos = localStorage.getItem("todos");
+    const parseTodos = JSON.parse(todos);
+    if (parseTodos) {
+      this.setState({ todos: parseTodos });
+    }
   }
 
   componentDidApdate(prevProps, prevState) {
